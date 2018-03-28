@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 16px;
+  background: #F5F8FA;
 }
 
 *, *:before, *:after {
@@ -43,4 +44,25 @@ img {
 .Search__Input, .Search__Button {
   font-size: 1.2rem;
   padding: 0.2em;
+}
+
+.Search__Results {
+  width: 40vw; 
+  min-width: 300px;
+  margin: 0 auto; 
+  text-align: left;
+}
+
+.Search__Results--Tweet {
+  margin: 1em auto;
+  border: 1px solid #eee;
+  padding: 2em 4em;
+  border-radius: 5px;
+  max-width: 500px;
+  background: white;
+}
+
+.container p {
+  margin-top: 1em;
+  text-decoration: underline;
 }

@@ -13,7 +13,10 @@ class Profile extends React.Component {
 
   render() {
     const { user } = this.props.data.twitter;
-    const userValues = Object.entries(user);
+    let tweet;
+    if (user) {
+      [tweet] = user.tweets.map(({ text }) => text);
+    }
     return (
       <div className="container">
         <h1>Explore Twitter Users</h1>
@@ -31,12 +34,23 @@ class Profile extends React.Component {
           <button className="Search__Button">Search</button>
         </form>
 
-        <ul>{userValues.map((el, i) => <li key={i}>{String(el)}</li>)}</ul>
+        <ul className="Search__Results">
+          {user
+            ? Object.entries(user).map(([key, val], i) => (
+                <li key={i}>
+                  <span style={{ fontWeight: "bold" }}>{String(key)}</span>{" "}
+                  {String(val)}
+                </li>
+              ))
+            : "no user found"}
+        </ul>
 
+        <p>Most Recent Tweet</p>
+        <ul className="Search__Results--Tweet">{user ? tweet : ""}</ul>
         <img
-          style={{ height: "200px" }}
-          src={user.profile_image_url}
-          alt="Redundant alt attribute"
+          style={{ height: "15em", marginTop: "1em" }}
+          src={user ? user.profile_image_url : ""}
+          alt={user ? user.name : ""}
         />
       </div>
     );
