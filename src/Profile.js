@@ -11,6 +11,9 @@ class Profile extends React.Component {
     });
   };
 
+  tweetToLink = tweet =>
+    tweet.replace(/(https?:\/\/([^\s]+))/gi, '<a href="$1">$2</a>');
+
   render() {
     const { user } = this.props.data.twitter;
     let tweet;
@@ -46,7 +49,14 @@ class Profile extends React.Component {
         </ul>
 
         <p>Most Recent Tweet</p>
-        <ul className="Search__Results--Tweet">{user ? tweet : ""}</ul>
+        {user ? (
+          <ul
+            className="Search__Results--Tweet"
+            dangerouslySetInnerHTML={{ __html: this.tweetToLink(tweet) }}
+          />
+        ) : (
+          ""
+        )}
         <img
           style={{ height: "15em", marginTop: "1em" }}
           src={user ? user.profile_image_url : ""}
